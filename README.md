@@ -7,8 +7,13 @@ personal data.
 | --- | --- |
 | `binance_spot_delist.json` | Coins whose Binance spot USDT market was closed |
 | `binance_spot_swap.json` | Token swaps, rebrands and redenominations on Binance |
+| `paribu_delist.json` | Coins that Paribu closed |
+| `paribu_swap.json` | Token swaps, rebrands and redenominations on Paribu |
 
-Both files are read as a whole. To correct a row, edit it; to withdraw one, delete it.
+Each exchange has files of its own: one swap comes on another day on each exchange, or
+not at all.
+
+Each file is read as a whole. To correct a row, edit it; to withdraw one, delete it.
 Times are UTC.
 
 ```json
