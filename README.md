@@ -9,6 +9,8 @@ personal data.
 | `binance_spot_swap.json` | Token swaps, rebrands and redenominations on Binance |
 | `paribu_delist.json` | Coins that Paribu closed |
 | `paribu_swap.json` | Token swaps, rebrands and redenominations on Paribu |
+| `mexc_delist.json` | Coins that MEXC closed |
+| `mexc_swap.json` | Token swaps, rebrands and redenominations on MEXC |
 
 Each exchange has files of its own: one swap comes on another day on each exchange, or
 not at all.

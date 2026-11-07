@@ -1,0 +1,1524 @@
+{
+  "version": 1,
+  "swaps": [
+    {
+      "old": "BSCX",
+      "new": "LZ",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2021-09-06T06:29:00Z"
+    },
+    {
+      "old": "MCC",
+      "new": "MCC1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2021-11-25T03:36:00Z"
+    },
+    {
+      "old": "SAFEMOON",
+      "new": "SFM",
+      "ratio": 0.001,
+      "rate": "1000:1",
+      "date": "2022-01-07T20:18:00Z"
+    },
+    {
+      "old": "BTT",
+      "new": "BTT",
+      "ratio": 1000.0,
+      "rate": "1:1000",
+      "date": "2022-01-13T20:58:00Z"
+    },
+    {
+      "old": "ANY",
+      "new": "MULTI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-03-24T08:20:00Z"
+    },
+    {
+      "old": "FLUX",
+      "new": "ZO",
+      "ratio": 21.8879,
+      "rate": "1:21.8879",
+      "date": "2022-04-11T02:54:00Z"
+    },
+    {
+      "old": "GHC",
+      "new": "GHC",
+      "ratio": 0.5,
+      "rate": "2:1",
+      "date": "2022-04-11T23:07:00Z"
+    },
+    {
+      "old": "LUFFY",
+      "new": "LUFFY",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-04-20T22:23:00Z"
+    },
+    {
+      "old": "MW",
+      "new": "MW",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2022-05-05T20:17:00Z"
+    },
+    {
+      "old": "EPS",
+      "new": "EPX",
+      "ratio": 88.0,
+      "rate": "1:88",
+      "date": "2022-05-08T21:43:00Z"
+    },
+    {
+      "old": "UST",
+      "new": "USTC",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-05-11T00:54:00Z"
+    },
+    {
+      "old": "TONCOIN",
+      "new": "TON",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-05-11T19:25:00Z"
+    },
+    {
+      "old": "LUNA",
+      "new": "LUNC",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-05-25T07:49:00Z"
+    },
+    {
+      "old": "SAITAMA",
+      "new": "SAITAMA",
+      "ratio": 1e-06,
+      "rate": "1000000:1",
+      "date": "2022-06-06T22:52:00Z"
+    },
+    {
+      "old": "RAMP",
+      "new": "LEVER",
+      "ratio": 35.0,
+      "rate": "1:35",
+      "date": "2022-07-13T02:36:00Z"
+    },
+    {
+      "old": "MVRS",
+      "new": "MVRS",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2022-07-30T22:47:00Z"
+    },
+    {
+      "old": "MWT",
+      "new": "MIM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-08-20T03:41:00Z"
+    },
+    {
+      "old": "HYPE",
+      "new": "HYPES",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-09-05T01:38:00Z"
+    },
+    {
+      "old": "WEMIX",
+      "new": "WEMIX",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-10-18T04:07:00Z"
+    },
+    {
+      "old": "ITAMCUBE",
+      "new": "FNCY",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2022-12-02T09:00:00Z"
+    },
+    {
+      "old": "MBTC",
+      "new": "BTC",
+      "ratio": 0.001,
+      "rate": "1000:1",
+      "date": "2023-03-20T23:59:00Z"
+    },
+    {
+      "old": "GPT",
+      "new": "LAI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2023-05-31T07:05:00Z"
+    },
+    {
+      "old": "QUICK",
+      "new": "QUICK",
+      "ratio": 1000.0,
+      "rate": "1:1000",
+      "date": "2023-07-20T11:04:00Z"
+    },
+    {
+      "old": "EPK",
+      "new": "AIEPK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2023-08-09T10:38:00Z"
+    },
+    {
+      "old": "STEPWATCH",
+      "new": "SWP",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2023-08-22T02:49:00Z"
+    },
+    {
+      "old": "ONSTON",
+      "new": "ZELIX",
+      "ratio": 10.0,
+      "rate": "1:10",
+      "date": "2023-10-14T05:25:00Z"
+    },
+    {
+      "old": "MC",
+      "new": "BEAMX",
+      "ratio": 100.0,
+      "rate": "1:100",
+      "date": "2023-11-03T06:09:00Z"
+    },
+    {
+      "old": "BUSD",
+      "new": "USDT",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2023-11-30T08:53:00Z"
+    },
+    {
+      "old": "TVK",
+      "new": "VANRY",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2023-12-01T14:24:00Z"
+    },
+    {
+      "old": "ZKS",
+      "new": "ZKB",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-01-26T11:23:00Z"
+    },
+    {
+      "old": "XCOIN",
+      "new": "XERS",
+      "ratio": 0.001,
+      "rate": "1000:1",
+      "date": "2024-01-30T04:42:00Z"
+    },
+    {
+      "old": "WSM",
+      "new": "WSM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-02-23T10:44:00Z"
+    },
+    {
+      "old": "MEGALAND",
+      "new": "MEGALAND",
+      "ratio": 7.246376811594203e-07,
+      "rate": "1380000:1",
+      "date": "2024-02-28T10:50:00Z"
+    },
+    {
+      "old": "MUTE",
+      "new": "KOI",
+      "ratio": 12.5,
+      "rate": "1:12.5",
+      "date": "2024-03-19T15:18:00Z"
+    },
+    {
+      "old": "ZBC",
+      "new": "ZBCN",
+      "ratio": 10.0,
+      "rate": "1:10",
+      "date": "2024-04-15T06:25:00Z"
+    },
+    {
+      "old": "GF",
+      "new": "ZENT",
+      "ratio": 10.0,
+      "rate": "1:10",
+      "date": "2024-04-30T10:21:00Z"
+    },
+    {
+      "old": "ALT0",
+      "new": "AL",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-05-08T05:57:00Z"
+    },
+    {
+      "old": "ATOR",
+      "new": "ANYONE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-07-02T03:01:00Z"
+    },
+    {
+      "old": "PAWSWAP",
+      "new": "PAWSWAP",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-07-09T02:33:00Z"
+    },
+    {
+      "old": "CQT",
+      "new": "CXT",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-07-23T04:10:00Z"
+    },
+    {
+      "old": "RNDR",
+      "new": "RENDER",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-07-26T07:02:00Z"
+    },
+    {
+      "old": "GAL",
+      "new": "G",
+      "ratio": 60.0,
+      "rate": "1:60",
+      "date": "2024-07-29T02:40:00Z"
+    },
+    {
+      "old": "BBS",
+      "new": "RTB",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-08-17T02:21:00Z"
+    },
+    {
+      "old": "FRONT",
+      "new": "SLF",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-08-30T03:59:00Z"
+    },
+    {
+      "old": "ROUTE",
+      "new": "ROUTE",
+      "ratio": 33.333333333333336,
+      "rate": "3:100",
+      "date": "2024-09-03T11:41:00Z"
+    },
+    {
+      "old": "MATIC",
+      "new": "POL",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-09-12T14:22:00Z"
+    },
+    {
+      "old": "WMT",
+      "new": "WMTX",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-10-08T13:02:00Z"
+    },
+    {
+      "old": "BCX",
+      "new": "BCX",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-10-11T14:12:00Z"
+    },
+    {
+      "old": "KLAY",
+      "new": "KAIA",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-10-31T03:29:00Z"
+    },
+    {
+      "old": "OGV",
+      "new": "OGN",
+      "ratio": 0.09137,
+      "rate": "1:0.09137",
+      "date": "2024-11-05T12:13:00Z"
+    },
+    {
+      "old": "IMGNAI",
+      "new": "IMGNAI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-11-29T07:41:00Z"
+    },
+    {
+      "old": "GROOVE",
+      "new": "GROOVE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2024-12-13T11:14:00Z"
+    },
+    {
+      "old": "DAR",
+      "new": "D",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-01-10T00:00:00Z"
+    },
+    {
+      "old": "NEXT",
+      "new": "CLEAR",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-01-25T12:37:00Z"
+    },
+    {
+      "old": "BNX",
+      "new": "FORM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-03-19T09:23:00Z"
+    },
+    {
+      "old": "IMGNAI",
+      "new": "IMGN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-03-27T12:51:00Z"
+    },
+    {
+      "old": "TLC",
+      "new": "BOOK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-10T06:48:00Z"
+    },
+    {
+      "old": "PEM",
+      "new": "ACP",
+      "ratio": 5.0,
+      "rate": "1:5",
+      "date": "2025-05-12T08:54:00Z"
+    },
+    {
+      "old": "LVN",
+      "new": "RUJI",
+      "ratio": 0.007191,
+      "rate": "1:0.007191",
+      "date": "2025-05-17T06:00:00Z"
+    },
+    {
+      "old": "RWA",
+      "new": "RWAINC",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-17T11:00:00Z"
+    },
+    {
+      "old": "DEFAI",
+      "new": "DEFIAI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-21T04:00:00Z"
+    },
+    {
+      "old": "STPT",
+      "new": "AWE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-21T05:29:00Z"
+    },
+    {
+      "old": "M",
+      "new": "MANTIS",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-26T08:00:00Z"
+    },
+    {
+      "old": "EOS",
+      "new": "A",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-26T17:47:00Z"
+    },
+    {
+      "old": "CA",
+      "new": "CA1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-27T04:30:00Z"
+    },
+    {
+      "old": "CAILA",
+      "new": "CA",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-27T05:30:00Z"
+    },
+    {
+      "old": "AXOL",
+      "new": "AXOL",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-29T12:18:00Z"
+    },
+    {
+      "old": "BVT",
+      "new": "BILLIONVIEW",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-30T15:20:00Z"
+    },
+    {
+      "old": "HPO",
+      "new": "HP",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-05-31T05:36:00Z"
+    },
+    {
+      "old": "FLY",
+      "new": "FLYN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-06-04T14:30:00Z"
+    },
+    {
+      "old": "SPC",
+      "new": "SPCFIN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-06-05T04:11:00Z"
+    },
+    {
+      "old": "PUMP",
+      "new": "PUMPBTC",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-06-05T14:00:00Z"
+    },
+    {
+      "old": "VITE",
+      "new": "JEETS",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2025-06-11T03:53:00Z"
+    },
+    {
+      "old": "TRAC",
+      "new": "TNK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-06-12T13:30:00Z"
+    },
+    {
+      "old": "AIN",
+      "new": "AINETWORK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-06-13T12:30:00Z"
+    },
+    {
+      "old": "SIMPSON",
+      "new": "SIMPSON1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-06-24T06:00:00Z"
+    },
+    {
+      "old": "BLP",
+      "new": "BLPAI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-01T16:13:00Z"
+    },
+    {
+      "old": "C",
+      "new": "CROAK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-02T07:30:00Z"
+    },
+    {
+      "old": "PRQ",
+      "new": "REACT",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-02T14:04:00Z"
+    },
+    {
+      "old": "NPT",
+      "new": "MAY",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-08T04:03:00Z"
+    },
+    {
+      "old": "KING",
+      "new": "CHARLES",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-08T05:00:00Z"
+    },
+    {
+      "old": "KILT",
+      "new": "KILT",
+      "ratio": 1.75,
+      "rate": "1:1.75",
+      "date": "2025-07-15T02:11:00Z"
+    },
+    {
+      "old": "KAT",
+      "new": "KARAT",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-15T06:00:00Z"
+    },
+    {
+      "old": "SBX",
+      "new": "SOBAX",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-16T14:00:00Z"
+    },
+    {
+      "old": "XTM",
+      "new": "TORUM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-17T10:00:00Z"
+    },
+    {
+      "old": "KUJI",
+      "new": "RUJI",
+      "ratio": 0.372461,
+      "rate": "1:0.372461",
+      "date": "2025-07-21T14:34:00Z"
+    },
+    {
+      "old": "DOGELINK",
+      "new": "DOGEBSC",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-23T14:00:00Z"
+    },
+    {
+      "old": "SPACEM",
+      "new": "SPCM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-24T15:28:00Z"
+    },
+    {
+      "old": "PHY",
+      "new": "PHYCHAIN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-25T05:00:00Z"
+    },
+    {
+      "old": "PANDA",
+      "new": "PANDA",
+      "ratio": 0.25,
+      "rate": "4:1",
+      "date": "2025-07-28T06:00:00Z"
+    },
+    {
+      "old": "GAIA",
+      "new": "GAIA1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-29T04:00:00Z"
+    },
+    {
+      "old": "TUNA",
+      "new": "TUNACHAIN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-07-29T07:00:00Z"
+    },
+    {
+      "old": "LOKA",
+      "new": "A2Z",
+      "ratio": 20.0,
+      "rate": "1:20",
+      "date": "2025-07-29T09:29:00Z"
+    },
+    {
+      "old": "ANT",
+      "new": "AUTONOMI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-01T10:30:00Z"
+    },
+    {
+      "old": "ASTO",
+      "new": "THINK",
+      "ratio": 0.28943,
+      "rate": "1:0.28943",
+      "date": "2025-08-01T12:09:00Z"
+    },
+    {
+      "old": "U",
+      "new": "UCOIN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-01T13:00:00Z"
+    },
+    {
+      "old": "DARK",
+      "new": "DARKECLIPSE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-04T03:00:00Z"
+    },
+    {
+      "old": "DORA",
+      "new": "DORAFACTORY",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-05T06:00:00Z"
+    },
+    {
+      "old": "X",
+      "new": "XEMPIRE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-06T04:00:00Z"
+    },
+    {
+      "old": "K",
+      "new": "KINTO",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-07T08:00:00Z"
+    },
+    {
+      "old": "DOGEBSC",
+      "new": "DOGEBSC",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2025-08-12T13:04:00Z"
+    },
+    {
+      "old": "NEXD",
+      "new": "IRWA",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-08-13T04:55:00Z"
+    },
+    {
+      "old": "ADS",
+      "new": "ALKIMI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-19T03:02:00Z"
+    },
+    {
+      "old": "DGC",
+      "new": "DANGNN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-19T10:00:00Z"
+    },
+    {
+      "old": "MEOW",
+      "new": "SOONS",
+      "ratio": 5e-06,
+      "rate": "200000:1",
+      "date": "2025-08-25T05:39:00Z"
+    },
+    {
+      "old": "SHARDS",
+      "new": "SHARD",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-27T12:00:00Z"
+    },
+    {
+      "old": "Q",
+      "new": "QUANTUM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-08-29T12:00:00Z"
+    },
+    {
+      "old": "OPEN",
+      "new": "OPENGPU",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-01T10:00:00Z"
+    },
+    {
+      "old": "U",
+      "new": "U1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-02T11:00:00Z"
+    },
+    {
+      "old": "MEAL",
+      "new": "MEAL",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-09-04T10:57:00Z"
+    },
+    {
+      "old": "LUCI",
+      "new": "LUCI",
+      "ratio": 10.0,
+      "rate": "1:10",
+      "date": "2025-09-05T11:16:00Z"
+    },
+    {
+      "old": "STAR",
+      "new": "STARHEROES",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-05T12:00:00Z"
+    },
+    {
+      "old": "VON",
+      "new": "VAMEON",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-07T04:00:00Z"
+    },
+    {
+      "old": "BABYBONK",
+      "new": "BABYBONK",
+      "ratio": 1e-06,
+      "rate": "1000000:1",
+      "date": "2025-09-09T02:39:00Z"
+    },
+    {
+      "old": "OZONE",
+      "new": "OZONAI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-09T08:00:00Z"
+    },
+    {
+      "old": "TRIAS",
+      "new": "NETX",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-09T12:01:00Z"
+    },
+    {
+      "old": "DSP",
+      "new": "DSP",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-09-11T12:08:00Z"
+    },
+    {
+      "old": "MKR",
+      "new": "SKY",
+      "ratio": 24000.0,
+      "rate": "1:24000",
+      "date": "2025-09-13T04:33:00Z"
+    },
+    {
+      "old": "LBTC",
+      "new": "LBTC1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-13T12:00:00Z"
+    },
+    {
+      "old": "MONR",
+      "new": "MONR",
+      "ratio": 0.5,
+      "rate": "2:1",
+      "date": "2025-09-18T13:15:00Z"
+    },
+    {
+      "old": "APX",
+      "new": "ASTER",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-20T09:19:00Z"
+    },
+    {
+      "old": "MON",
+      "new": "MONPRO",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-21T07:00:00Z"
+    },
+    {
+      "old": "NIZA",
+      "new": "NIZA",
+      "ratio": 0.0006666666666666666,
+      "rate": "1500:1",
+      "date": "2025-09-22T10:12:00Z"
+    },
+    {
+      "old": "SHIBBABY",
+      "new": "SHIBBABY",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-09-22T12:56:00Z"
+    },
+    {
+      "old": "LIGHT",
+      "new": "LIGHT1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-25T04:30:00Z"
+    },
+    {
+      "old": "QBOT",
+      "new": "QBOT",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2025-09-26T05:57:00Z"
+    },
+    {
+      "old": "PSPS",
+      "new": "BOBACAT",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-27T11:05:00Z"
+    },
+    {
+      "old": "COG",
+      "new": "COG",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-09-28T07:12:00Z"
+    },
+    {
+      "old": "CELDATA",
+      "new": "CELDATA",
+      "ratio": 0.001,
+      "rate": "1000:1",
+      "date": "2025-09-29T07:14:00Z"
+    },
+    {
+      "old": "PSP",
+      "new": "VLR",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-09-29T13:15:00Z"
+    },
+    {
+      "old": "OMNI",
+      "new": "NOM",
+      "ratio": 75.0,
+      "rate": "1:75",
+      "date": "2025-09-30T06:02:00Z"
+    },
+    {
+      "old": "MET",
+      "new": "METYA",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-08T08:00:00Z"
+    },
+    {
+      "old": "BIANRENSHENG",
+      "new": "BINANCELIFE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-09T13:15:00Z"
+    },
+    {
+      "old": "DGGO",
+      "new": "DGGO",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2025-10-10T08:17:00Z"
+    },
+    {
+      "old": "CA1",
+      "new": "CA",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-15T09:00:00Z"
+    },
+    {
+      "old": "JUMP",
+      "new": "JUMP",
+      "ratio": 0.5,
+      "rate": "2:1",
+      "date": "2025-10-16T09:19:00Z"
+    },
+    {
+      "old": "LUCKY",
+      "new": "LUCKY",
+      "ratio": 0.5,
+      "rate": "2:1",
+      "date": "2025-10-16T09:24:00Z"
+    },
+    {
+      "old": "SWAP",
+      "new": "TRUSTSWAP",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-17T03:00:00Z"
+    },
+    {
+      "old": "SLERF",
+      "new": "SLERF",
+      "ratio": 2.0,
+      "rate": "1:2",
+      "date": "2025-10-20T09:32:00Z"
+    },
+    {
+      "old": "SIGMA",
+      "new": "SIGMA1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-20T10:00:00Z"
+    },
+    {
+      "old": "COM",
+      "new": "BRC20COM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-21T04:00:00Z"
+    },
+    {
+      "old": "OMNILABS",
+      "new": "OMNILABS",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-10-21T16:04:00Z"
+    },
+    {
+      "old": "WEB3D",
+      "new": "WEB3D",
+      "ratio": 0.2,
+      "rate": "5:1",
+      "date": "2025-10-23T03:18:00Z"
+    },
+    {
+      "old": "ELIZA",
+      "new": "ELIZA1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-24T07:00:00Z"
+    },
+    {
+      "old": "DEGENFI",
+      "new": "DEGENFI",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2025-10-26T07:25:00Z"
+    },
+    {
+      "old": "CHONKY",
+      "new": "CHONKY",
+      "ratio": 0.002,
+      "rate": "500:1",
+      "date": "2025-10-26T07:27:00Z"
+    },
+    {
+      "old": "LAUNCHCOIN",
+      "new": "BELIEVE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-26T07:32:00Z"
+    },
+    {
+      "old": "ANTY",
+      "new": "ANTY",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-10-27T12:35:00Z"
+    },
+    {
+      "old": "AEGIS",
+      "new": "AEGIS",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-10-28T07:49:00Z"
+    },
+    {
+      "old": "PIKA",
+      "new": "ORBIO",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-10-29T02:09:00Z"
+    },
+    {
+      "old": "PMIND",
+      "new": "PMIND",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-10-31T13:25:00Z"
+    },
+    {
+      "old": "SBM",
+      "new": "SBM",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2025-10-31T13:28:00Z"
+    },
+    {
+      "old": "ARBT",
+      "new": "ARBT",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-10-31T13:31:00Z"
+    },
+    {
+      "old": "SHM",
+      "new": "SHM",
+      "ratio": 240.0,
+      "rate": "1:240",
+      "date": "2025-11-05T07:46:00Z"
+    },
+    {
+      "old": "AI16Z",
+      "new": "ELIZAOS",
+      "ratio": 6.0,
+      "rate": "1:6",
+      "date": "2025-11-06T10:06:00Z"
+    },
+    {
+      "old": "RISE",
+      "new": "SUNRISE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-11-07T11:00:00Z"
+    },
+    {
+      "old": "LIFE",
+      "new": "LIFECRYPTO",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-11-10T10:30:00Z"
+    },
+    {
+      "old": "UT",
+      "new": "UT",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-11-11T02:10:00Z"
+    },
+    {
+      "old": "METYA",
+      "new": "MY",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-11-12T09:55:00Z"
+    },
+    {
+      "old": "BOB",
+      "new": "BOBMEME",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-11-13T11:00:00Z"
+    },
+    {
+      "old": "AGIB",
+      "new": "AGIB",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-11-13T14:06:00Z"
+    },
+    {
+      "old": "COPI",
+      "new": "RISE",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-11-14T10:38:00Z"
+    },
+    {
+      "old": "SCX",
+      "new": "SCX",
+      "ratio": 0.01,
+      "rate": "100:1",
+      "date": "2025-11-18T13:05:00Z"
+    },
+    {
+      "old": "SCAM",
+      "new": "SCAMSOL",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-11-20T07:00:00Z"
+    },
+    {
+      "old": "WISP",
+      "new": "WISP",
+      "ratio": 0.1,
+      "rate": "10:1",
+      "date": "2025-11-20T13:38:00Z"
+    },
+    {
+      "old": "OOBIT",
+      "new": "OOB",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-12-01T02:25:00Z"
+    },
+    {
+      "old": "ZKP",
+      "new": "PANTHER",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-12-02T11:00:00Z"
+    },
+    {
+      "old": "JSK",
+      "new": "JSK",
+      "ratio": 0.001,
+      "rate": "1000:1",
+      "date": "2025-12-12T07:14:00Z"
+    },
+    {
+      "old": "HODL",
+      "new": "HODL",
+      "ratio": 0.001,
+      "rate": "1000:1",
+      "date": "2025-12-22T06:46:00Z"
+    },
+    {
+      "old": "LIT",
+      "new": "LITT",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2025-12-22T09:00:00Z"
+    },
+    {
+      "old": "DRAMA",
+      "new": "DRAMA",
+      "ratio": 0.001,
+      "rate": "1000:1",
+      "date": "2025-12-24T06:21:00Z"
+    },
+    {
+      "old": "SPACE",
+      "new": "SPACEMVC",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-09T07:00:00Z"
+    },
+    {
+      "old": "FXS",
+      "new": "FRAX",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-09T14:39:00Z"
+    },
+    {
+      "old": "IXT",
+      "new": "AIXT",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-09T14:44:00Z"
+    },
+    {
+      "old": "FUN",
+      "new": "FUNTOKEN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-13T03:00:00Z"
+    },
+    {
+      "old": "AI",
+      "new": "SLEEPLESSAI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-14T14:00:00Z"
+    },
+    {
+      "old": "NIGELLA",
+      "new": "HLK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-21T10:00:00Z"
+    },
+    {
+      "old": "SPACE",
+      "new": "SPACESOL",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-21T12:00:00Z"
+    },
+    {
+      "old": "GALEON",
+      "new": "GALEON1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-01-30T13:00:00Z"
+    },
+    {
+      "old": "WOJAKETH",
+      "new": "WOJAK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-02-03T10:00:00Z"
+    },
+    {
+      "old": "WOJAK",
+      "new": "WOJAK",
+      "ratio": 958.0,
+      "rate": "1:958",
+      "date": "2026-02-04T08:27:00Z"
+    },
+    {
+      "old": "EVA",
+      "new": "EVA1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-02-06T06:30:00Z"
+    },
+    {
+      "old": "SERSH",
+      "new": "RWS",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-02-17T08:00:00Z"
+    },
+    {
+      "old": "OM",
+      "new": "MANTRA",
+      "ratio": 4.0,
+      "rate": "1:4",
+      "date": "2026-03-04T14:12:00Z"
+    },
+    {
+      "old": "COREUM",
+      "new": "SOLO",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-06T10:34:00Z"
+    },
+    {
+      "old": "USOON",
+      "new": "OIL(USOON)",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-10T10:00:00Z"
+    },
+    {
+      "old": "UP",
+      "new": "SUPERFORM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-11T09:00:00Z"
+    },
+    {
+      "old": "BLEND",
+      "new": "BLEND1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-11T10:00:00Z"
+    },
+    {
+      "old": "ICENETWORK",
+      "new": "ION",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-12T10:09:00Z"
+    },
+    {
+      "old": "AKITA",
+      "new": "AKITA",
+      "ratio": 1e-06,
+      "rate": "1000000:1",
+      "date": "2026-03-17T08:40:00Z"
+    },
+    {
+      "old": "EDGE",
+      "new": "EDGE1",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-19T15:00:00Z"
+    },
+    {
+      "old": "QAI",
+      "new": "QFI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-30T11:22:00Z"
+    },
+    {
+      "old": "U",
+      "new": "UNION",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-03-30T12:00:00Z"
+    },
+    {
+      "old": "PROS",
+      "new": "PROSPER",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-04-08T07:00:00Z"
+    },
+    {
+      "old": "DAI",
+      "new": "USDS",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-04-08T10:19:00Z"
+    },
+    {
+      "old": "SLX",
+      "new": "SLIMEX",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-04-14T10:00:00Z"
+    },
+    {
+      "old": "SPACESOL",
+      "new": "SPC",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-04-17T03:00:00Z"
+    },
+    {
+      "old": "AITECH",
+      "new": "ACN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-04-28T05:29:00Z"
+    },
+    {
+      "old": "MOBILE",
+      "new": "HNT",
+      "ratio": 0.00013333333333333334,
+      "rate": "7500:1",
+      "date": "2026-05-06T08:00:00Z"
+    },
+    {
+      "old": "AERGO",
+      "new": "HPP",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-05-11T03:01:00Z"
+    },
+    {
+      "old": "BSU",
+      "new": "BABYSHARK",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-05-13T05:38:00Z"
+    },
+    {
+      "old": "BOBO",
+      "new": "BOBO",
+      "ratio": 1.4492753623188405e-05,
+      "rate": "69000:1",
+      "date": "2026-05-14T02:38:00Z"
+    },
+    {
+      "old": "PHIL",
+      "new": "AKITA",
+      "ratio": 0.016666666666666666,
+      "rate": "60:1",
+      "date": "2026-05-15T08:28:00Z"
+    },
+    {
+      "old": "SPACEX(PRE)",
+      "new": "SPACEX(PRE)",
+      "ratio": 5.0,
+      "rate": "1:5",
+      "date": "2026-05-25T02:46:00Z"
+    },
+    {
+      "old": "GRAM",
+      "new": "GRM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-06-04T11:00:00Z"
+    },
+    {
+      "old": "TON",
+      "new": "GRAM",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-06-15T12:00:00Z"
+    },
+    {
+      "old": "MUMU",
+      "new": "MUMU",
+      "ratio": 0.0004292512951692016,
+      "rate": "1:0.0004292512952",
+      "date": "2026-06-15T14:33:00Z"
+    },
+    {
+      "old": "ARX",
+      "new": "ARCS",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-06-20T08:00:00Z"
+    },
+    {
+      "old": "XION",
+      "new": "VERONA",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-06-22T09:00:00Z"
+    },
+    {
+      "old": "CAP",
+      "new": "CAPINFRA",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-06-25T07:00:00Z"
+    },
+    {
+      "old": "IP",
+      "new": "DATA",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-06-29T10:00:00Z"
+    },
+    {
+      "old": "STOOS",
+      "new": "STOC",
+      "ratio": 5.0,
+      "rate": "1:5",
+      "date": "2026-07-09T06:43:00Z"
+    },
+    {
+      "old": "PLN",
+      "new": "PLEARN",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-08-12T04:00:00Z"
+    },
+    {
+      "old": "MEME1",
+      "new": "MEMEROBINHOOD",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-09-04T08:25:00Z"
+    },
+    {
+      "old": "ARC",
+      "new": "ARCAI",
+      "ratio": 1.0,
+      "rate": "1:1",
+      "date": "2026-09-18T03:00:00Z"
+    },
+    {
+      "old": "STG",
+      "new": "ZRO",
+      "ratio": 0.08634,
+      "rate": "1:0.08634",
+      "date": "2026-09-26T01:48:00Z"
+    },
+    {
+      "old": "VELODROME",
+      "new": "AERO",
+      "ratio": 0.044,
+      "rate": "1:0.044",
+      "date": "2026-10-31T09:15:00Z"
+    }
+  ]
+}
