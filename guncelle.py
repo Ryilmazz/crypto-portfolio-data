@@ -39,7 +39,7 @@ NEWS_SEEN = HERE / 'kaynak' / 'mexc_son_duyuru.txt'
 NEWS_FROM = '2026-11-07T00:00:00Z'
 NEWS_WORDS = re.compile(
     r'token swap|contract swap|swap (?:of|to|into)|migration|rebrand|renam|ticker|'
-    r'redenominat|token merge|merger|token split|delist|suspension of', re.I)
+    r'redenominat|token merge|merger|token split|delist|suspension of|st warning', re.I)
 NEWS_NOISE = re.compile(
     r'will list|futures|perpetual|kickstarter|launches|airdrop|\betf\b|margin|convert|'
     r'guide|tutorial|competition|carnival', re.I)
@@ -227,7 +227,7 @@ def main():
     for name in BY_HAND:
         json.loads((HERE / f'{name}.json').read_text(encoding='utf-8'))
     waiting = git('status', '--porcelain', '--', *[f'{n}.json' for n in BY_HAND])
-    changes += [f'  * {line[3:]}' for line in waiting.splitlines()]
+    changes += [f'  * {line.split(None, 1)[-1]}' for line in waiting.splitlines()]
     if not changes:
         print('Değişiklik yok.')
         return
