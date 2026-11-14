@@ -24,7 +24,16 @@ Times are UTC. The time of a row follows the rule of its list:
 Each run also looks whether the coins of the delisting lists whose time has passed are
 gone from their exchange. A coin found gone is noted as such and not looked at again;
 one still traded is drafted out of its list, since the app counts nothing left of a
-delisted coin.
+delisted coin, and watched for some days more: if it goes then, it comes back with the
+time it really went.
+
+The ratio of each swap, drafted or in a list, is checked against the market once the
+swap has happened: the last price of the old coin is about the ratio times the first
+price of the new one. Binance and Paribu keep the candles of closed pairs; MEXC does not,
+so the price of an old coin is kept on each run until its swap, and Binance's prices
+stand in where they can. A ratio that the market does not bear out is corrected with the
+ratio of the announcement that fits the market, never with the market's own figure; a
+draft that nothing fits waits, and is not published.
 """
 import argparse
 import gzip
@@ -83,6 +92,8 @@ MARKET_PAGES = {
 }
 # A delisting is looked at once this long has passed since its time.
 GRACE = timedelta(days=1)
+# How long a coin still traded after its delisting time is watched, to take its real time.
+WATCH = timedelta(days=14)
 # How the coins were found gone. When the rule changes, every coin is looked at again:
 # 2 counts the pairs of any quote, where Binance's were once its USDT pairs alone; 3 also
 # reads the candles of every pair that Binance closed, for a coin that went on trading
@@ -333,6 +344,8 @@ def ratio_for(text, old, new, number=amount):
 # --- Reading the announcements ------------------------------------------------------
 
 _markets = {}
+# The coins of MEXC's ST tables whose day has passed while their pairs still trade.
+_late_st = {}
 
 
 def markets(exchange):
@@ -706,6 +719,7 @@ def mexc_rows(articles, reader, now, since, sections=None):
                 counts['bekleyen ST'] += 1
             elif coin in listed:
                 counts['ST paritesi duran'] += 1
+                _late_st[coin] = when
             else:
                 rows.append(delist_row('mexc', coin, when, article, 'ST tablosu; paritesi kalmadı'))
     return rows, notes, counts
@@ -1067,6 +1081,8 @@ def check_delistings(exchange, lists, state, now):
         traded, paused = pairs.get(coin, ([], []))
         if traded:
             counts['hâlâ işlemde'] += 1
+            watch = state.setdefault('watch', {}).setdefault(name, {})
+            watch.setdefault(coin, {'date': when, 'until': stamp(now + WATCH)})['seen'] = stamp(now)
             rows.append({
                 'list': name, 'kind': 'undelist', 'coin': coin, 'date': when,
                 'note': 'delist günü geçti ama işlemde: ' + ', '.join(sorted(traded)[:4])
@@ -1095,6 +1111,273 @@ def check_delistings(exchange, lists, state, now):
     return rows, counts
 
 
+def gone_time(exchange, coin, item, now):
+    """When a watched coin stopped trading, with a word on how it was found."""
+    since = moment_of(item['date'])
+    if exchange == 'binance':
+        later = binance_last_trade(coin, since)
+        if later:
+            return later[0], f'son işlem {later[1]}'
+    if exchange == 'paribu':
+        rows = [r for r in candle_rows('paribu', coin, since - timedelta(days=1), now) if r[2] > 0]
+        if rows:
+            day = datetime.fromtimestamp(rows[-1][0] / 1000, TURKEY).date()
+            return datetime(day.year, day.month, day.day, 20, 59, tzinfo=UTC), 'son mum günü'
+    # MEXC keeps no candles of a closed pair: the day it was last seen traded, at the hour
+    # of its ST tables.
+    seen = moment_of(item.get('seen') or item['date'])
+    day = seen if seen.hour < 14 else seen + timedelta(days=1)
+    return day.replace(hour=14, minute=0, second=0), 'yaklaşık; en son işlemde görüldüğü gün'
+
+
+def watch_delistings(exchange, lists, state, now):
+    """Looks again at the coins that were still traded after their delisting time. One
+    that has gone since comes back as a draft with the time it went; the watch ends
+    once the list holds it, or after WATCH."""
+    name = LISTS[exchange][1]
+    watch = state.setdefault('watch', {}).setdefault(name, {})
+    coins = lists.get(name, {}).get('coins', {})
+    rows, counts = [], {'izleniyor': 0, 'sonradan kalktı': 0}
+    if not watch:
+        return rows, counts
+    pairs = markets(exchange)
+    for coin, item in list(watch.items()):
+        if not item.get('gone'):
+            traded, paused = pairs.get(coin, ([], []))
+            if traded or paused:
+                if traded:
+                    item['seen'] = stamp(now)
+                if now > moment_of(item['until']):
+                    del watch[coin]  # it stayed: the list was right to leave it out
+                else:
+                    counts['izleniyor'] += 1
+                continue
+            moment, how = gone_time(exchange, coin, item, now)
+            item['gone'], item['how'] = stamp(moment.replace(second=0, microsecond=0)), how
+        if coins.get(coin) == item['gone']:
+            del watch[coin]
+            continue
+        counts['sonradan kalktı'] += 1
+        have = coins.get(coin)
+        rows.append({
+            'list': name, 'kind': 'delist', 'coin': coin, 'date': item['gone'],
+            'note': f"delist gününden sonra kalktı ({item['how']})",
+            'title': 'Delist gününden sonra kalkan coinler', 'announced': stamp(now),
+            'source': MARKET_PAGES[exchange], 'sources': [MARKET_PAGES[exchange]],
+            'exchange': exchange, 'replaces': {'coin': coin, 'date': have} if have else None,
+            'check': True,
+        })
+    return rows, counts
+
+
+# --- Ratios checked against the market ----------------------------------------------
+
+# A swap keeps the value: the last price of the old coin is about the ratio times the
+# first price of the new one. Markets move between the close and the opening (right
+# ratios came out up to 1.9 times off when the new pair opened days later), while a
+# misread ratio is off 10, 100 or 1000 times; this much either way still passes.
+TOLERANCE = 2.0
+# How long the new pair of a swap may take to open before the check gives up.
+RATIO_WAIT = timedelta(days=14)
+MEXC_PRICES = 'https://api.mexc.com/api/v3/ticker/price'
+MEXC_CANDLES = ('https://api.mexc.com/api/v3/klines?symbol={}USDT&interval=60m&startTime={}'
+                '&endTime={}&limit=1000')
+PARIBU_CANDLES = 'https://web.paribu.com/chart/history?symbol={}_tl&resolution=60&from={}&to={}'
+# The quotes of a coin on Binance, by the dollar.
+DOLLARS = ('USDT', 'BUSD', 'USDC', 'FDUSD')
+
+
+def candle_rows(exchange, coin, start, end):
+    """Hourly candles of a coin from start to end, as (time ms, close, volume); none when
+    the exchange has no such pair. Binance and MEXC in dollars, Paribu in lira."""
+    begin, finish = int(start.timestamp() * 1000), int(end.timestamp() * 1000)
+    try:
+        if exchange == 'paribu':
+            data = json.loads(fetch(PARIBU_CANDLES.format(coin.lower(), begin // 1000, finish // 1000)))
+            return list(zip([t * 1000 for t in data.get('t') or []],
+                            map(float, data.get('c') or []), map(float, data.get('v') or [])))
+        if exchange == 'mexc':
+            data = json.loads(fetch(MEXC_CANDLES.format(coin, begin, finish)))
+            return [(c[0], float(c[4]), float(c[5])) for c in data]
+    except urllib.error.HTTPError:
+        return []
+    for quote in DOLLARS:
+        try:
+            data = json.loads(fetch(BINANCE_CANDLES.format(f'{coin}{quote}', '1h', begin)
+                                    + f'&endTime={finish}'))
+        except urllib.error.HTTPError:
+            continue
+        if any(float(c[5]) > 0 for c in data):
+            return [(c[0], float(c[4]), float(c[5])) for c in data]
+    return []
+
+
+def traded_close(rows, first):
+    traded = [row for row in rows if row[2] > 0]
+    return (traded[0] if first else traded[-1])[1] if traded else None
+
+
+def ratio_check(exchange, row, now, kept_prices):
+    """How the ratio of a swap stands against the market: 'doğrulandı', 'şüpheli',
+    'bekliyor' while the swap or its new pair is still to come, or 'doğrulanamadı' when
+    no prices are left; with the market ratio when there is one."""
+    when = moment_of(row['date'])
+    if when > now:
+        return {'state': 'bekliyor'}
+    found = None
+    for source in dict.fromkeys([exchange, 'binance']):
+        if row['old'] == row['new'] and (source == 'mexc' or source != exchange):
+            # MEXC rescales the past candles of a coin that keeps its name, and another
+            # exchange takes the step on a day of its own.
+            continue
+        before = traded_close(candle_rows(source, row['old'], when - timedelta(days=7), when), False)
+        if before is None and source == 'mexc':
+            kept = [k for k in kept_prices.get(row['old'], []) if k['time'] < row['date']]
+            before = kept[-1]['price'] if kept else None
+        if before is None:
+            continue
+        after = traded_close(candle_rows(source, row['new'], when, min(now, when + RATIO_WAIT)), True)
+        if after:
+            found = (before / after, source)
+            break
+    if not found:
+        return {'state': 'bekliyor' if now - when < RATIO_WAIT else 'doğrulanamadı'}
+    market, source = found
+    factor = market / row['ratio']
+    return {'state': 'doğrulandı' if 1 / TOLERANCE <= factor <= TOLERANCE else 'şüpheli',
+            'market': float(f'{market:.6g}'), 'factor': round(factor, 3), 'source': source}
+
+
+def keep_prices(state, lists, now):
+    """Keeps the prices of the old coins of the MEXC swaps still to come: MEXC forgets a
+    pair once it closes, and its last price is needed to check the ratio after."""
+    kept = state.setdefault('prices', {})
+    waiting = {r['old'] for r in lists.get('mexc_swap', {}).get('swaps', [])
+               if moment_of(r['date']) > now}
+    waiting |= {r['old'] for r in state['drafts'].values()
+                if r['list'] == 'mexc_swap' and moment_of(r['date']) > now}
+    for coin in [c for c in kept if c not in waiting and
+                 kept[c][-1]['time'] < stamp(now - timedelta(days=60))]:
+        del kept[coin]
+    if not waiting:
+        return kept
+    prices = {p['symbol']: float(p['price']) for p in json.loads(fetch(MEXC_PRICES))}
+    for coin in waiting:
+        price = prices.get(f'{coin}USDT')
+        if price:
+            kept[coin] = (kept.get(coin, []) + [{'time': stamp(now), 'price': price}])[-10:]
+    return kept
+
+
+def source_text(exchange, url, reader):
+    """The text of an announcement given by its link, from the cache or read again."""
+    name = url.rstrip('/').rsplit('/', 1)[-1]
+    load = {'mexc': lambda: mexc_text({'url': url}),
+            'binance': lambda: binance_text({'id': name}),
+            'paribu': lambda: paribu_text({'id': name, 'url': url})}[exchange]
+    kept = reader.cache.get(f'{exchange}:{name}')
+    try:
+        return reader.text(f'{exchange}:{name}', kept['updated'] if kept else 'kaynak', load)
+    except (OSError, ValueError, KeyError, Unreadable):
+        return ''
+
+
+def fitting_rate(exchange, row, market, reader):
+    """The one ratio of the swap's announcements that the market bears out, or None."""
+    number = turkish_amount if exchange == 'paribu' else amount
+    found = set()
+    for url in row.get('sources') or []:
+        if url in MARKET_PAGES.values():
+            continue
+        for old, at, new, bt, _ in ratios(source_text(exchange, url, reader), number):
+            if at in (None, row['old']) and bt in (None, row['new']) and \
+                    1 / TOLERANCE <= market / float(new / old) <= TOLERANCE:
+                found.add((old.normalize(), new.normalize()))
+    values = {float(new / old) for old, new in found}
+    return min(found) if len(values) == 1 else None
+
+
+def check_ratios(exchange, lists, state, now, reader):
+    """Checks the ratios of the swap drafts of an exchange, and once each the swaps of its
+    list. A ratio that the market does not bear out is corrected with the one of its
+    announcement that fits, when there is one; else it comes back as a note to read."""
+    kept = state.get('prices', {})
+    counts = {'doğrulandı': 0, 'düzeltildi': 0, 'şüpheli': 0, 'bekliyor': 0, 'doğrulanamadı': 0}
+    for row in state['drafts'].values():
+        if row['kind'] != 'swap' or row['exchange'] != exchange or \
+                (row.get('market') or {}).get('state') not in (None, 'bekliyor'):
+            continue
+        row['market'] = ratio_check(exchange, row, now, kept)
+        if row['market']['state'] == 'şüpheli':
+            fits = fitting_rate(exchange, row, row['market']['market'], reader)
+            if fits:
+                was = row['rate']
+                row['rate'], row['ratio'] = rate_of(*fits)
+                row['note'] += f'; oran piyasaya uyan duyuru satırından düzeltildi (okunan {was})'
+                row['market'] = ratio_check(exchange, row, now, kept)
+    name = LISTS[exchange][0]
+    done = state.setdefault('ratios', {})
+    origins = state.setdefault('origins', {})
+    rows = []
+    for row in lists.get(name, {}).get('swaps', []):
+        key = f"{name}|{row['old']}>{row['new']}|{row['date']}|{row['rate']}"
+        if key in done:
+            continue
+        result = ratio_check(exchange, row, now, kept)
+        if result['state'] == 'bekliyor':
+            counts['bekliyor'] += 1
+            continue
+        done[key] = {**result, 'list': name, 'old': row['old'], 'new': row['new'],
+                     'date': row['date']}
+        sources = origins.get(f"{name}|{row['old']}>{row['new']}|{row['date']}")
+        fits = result['state'] == 'şüpheli' and \
+            fitting_rate(exchange, {**row, 'sources': sources}, result['market'], reader)
+        if fits:
+            # The list took a misread ratio: the announcement's own fitting one replaces it.
+            counts['düzeltildi'] += 1
+            text, ratio = rate_of(*fits)
+            rows.append({
+                'list': name, 'kind': 'swap', 'old': row['old'], 'new': row['new'],
+                'ratio': ratio, 'rate': text, 'date': row['date'], 'exchange': exchange,
+                'note': f"listedeki {row['rate']} piyasayla tutmadı (piyasa {result['market']})",
+                'title': 'Oranı piyasayla tutmayan swaplar', 'announced': stamp(now),
+                'source': sources[0], 'sources': sources, 'fix': True,
+                'replaces': {'old': row['old'], 'new': row['new'], 'date': row['date'],
+                             'rate': row['rate']},
+            })
+            continue
+        counts[result['state']] += 1
+        if result['state'] == 'şüpheli':
+            state['notes'][f'oran:{key}'] = {
+                'exchange': exchange, 'announced': row['date'],
+                'title': f"{name}: {row['old']} → {row['new']} {row['rate']}",
+                'reason': f"piyasa oranı {result['market']}, listedekinin {result['factor']} katı",
+                'source': (sources or [MARKET_PAGES[exchange]])[0], 'seen': False}
+    return rows, counts
+
+
+def market_note(market):
+    if not market:
+        return ''
+    if market['state'] == 'doğrulandı':
+        return f"piyasa oranı {market['market']} ✓"
+    if market['state'] == 'şüpheli':
+        return f"piyasa oranı {market['market']}, duyurudakinin {market['factor']} katı ✗"
+    if market['state'] == 'bekliyor':
+        return 'oran swap sonrası piyasadan doğrulanacak'
+    return 'oran piyasadan doğrulanamadı'
+
+
+def ratio_marks(state):
+    """The market check of each swap, by (list, old, new, time)."""
+    marks = {(m['list'], m['old'], m['new'], m['date']): m
+             for m in state.get('ratios', {}).values()}
+    for row in state['drafts'].values():
+        if row['kind'] == 'swap' and row.get('market'):
+            marks[(row['list'], row['old'], row['new'], row['date'])] = row['market']
+    return marks
+
+
 # --- The drafts ---------------------------------------------------------------------
 
 def load_state():
@@ -1117,6 +1400,7 @@ def scan(days=None, keep=True, quiet=False, only=None):
     say = (lambda *a: None) if quiet else print
     now = now_utc()
     _markets.clear()
+    _late_st.clear()
     state = load_state()
     cache = json.loads(CACHE.read_text(encoding='utf-8')) if CACHE.exists() else {}
     reader = Reader(cache)
@@ -1150,9 +1434,23 @@ def scan(days=None, keep=True, quiet=False, only=None):
         state['read'][exchange] = stamp(now)
         read_from[exchange] = stamp(since)
         added = {'yeni': 0, 'düzeltme': 0, 'listede': 0, 'eski ad': 0}
+        if exchange == 'mexc':
+            # A coin of an ST table still traded after its day is watched, and takes the
+            # day it went rather than the day of the table.
+            watch = state.setdefault('watch', {}).setdefault(LISTS['mexc'][1], {})
+            for coin, when in _late_st.items():
+                if now - when < WATCH and coin not in lists['mexc_delist'].get('coins', {}):
+                    watch.setdefault(coin, {'date': stamp(when), 'until': stamp(when + WATCH)}) \
+                        ['seen'] = stamp(now)
+            rows = [row for row in rows if not (
+                row['kind'] == 'delist' and row['note'].startswith('ST tablosu') and row['coin'] in watch)]
         for row in rows:
             event = event_of(row)
             where, replaces = standing(row, lists)
+            # A time the watch found stands over the day of an ST table before it.
+            if where == 'düzeltme' and row['note'].startswith('ST tablosu') and \
+                    replaces['date'] > row['date']:
+                where = 'listede'
             added[where] += 1
             if where in ('listede', 'eski ad'):
                 seen_events.add(event)
@@ -1160,7 +1458,11 @@ def scan(days=None, keep=True, quiet=False, only=None):
             if key_of(row) in left:
                 continue
             seen_events.add(event)
-            state['drafts'][event] = {**row, 'replaces': replaces, 'exchange': exchange}
+            before_row = state['drafts'].get(event)
+            row = {**row, 'replaces': replaces, 'exchange': exchange}
+            if before_row and key_of(before_row) == key_of(row) and before_row.get('market'):
+                row['market'] = before_row['market']
+            state['drafts'][event] = row
         for article, reason in notes:
             key = f"{exchange}:{article['id']}"
             if key not in state['notes']:
@@ -1182,6 +1484,13 @@ def scan(days=None, keep=True, quiet=False, only=None):
                 'çalışmada yapılır.')
             continue
         checked.add(exchange)
+        try:
+            watched, more = watch_delistings(exchange, lists, state, now)
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            say(f'{NAMES[exchange]}: izlenen coinlere bakılamadı ({error}).')
+            watched, more = [], {}
+        rows += watched
+        counts.update({k: v for k, v in more.items() if v})
         for row in rows:
             event = event_of(row)
             seen_events.add(event)
@@ -1189,12 +1498,31 @@ def scan(days=None, keep=True, quiet=False, only=None):
                 state['drafts'][event] = row
         say(f'{NAMES[exchange]} delist kontrolü: '
             + ', '.join(f'{v} {k}' for k, v in counts.items() if v))
+    try:
+        if 'mexc' in chosen:
+            keep_prices(state, lists, now)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        say(f'MEXC fiyatları okunamadı ({error}).')
+    for exchange in chosen:
+        try:
+            fixes, counts = check_ratios(exchange, lists, state, now, reader)
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            say(f'{NAMES[exchange]}: oranlar piyasadan denetlenemedi ({error}).')
+            continue
+        for row in fixes:
+            if key_of(row) not in left:
+                state['drafts'][event_of(row)] = row
+        if any(counts.values()):
+            say(f'{NAMES[exchange]} oran kontrolü: '
+                + ', '.join(f'{v} {k}' for k, v in counts.items() if v))
     # A draft that the list now holds, by hand or otherwise, is done; so is one whose
     # announcement was read again without giving it, or a coin found gone after all.
     for event, row in list(state['drafts'].items()):
         if event in seen_events:
             continue
         exchange = row.get('exchange')
+        if row.get('fix') and standing(row, lists)[0] != 'listede':
+            continue  # a ratio corrected from the market waits until it is taken
         if standing(row, lists)[0] == 'listede' or \
                 (row['kind'] == 'undelist' or row.get('check')) and exchange in checked or \
                 row['kind'] != 'undelist' and not row.get('check') and exchange in read_from and \
@@ -1246,10 +1574,11 @@ def show(state):
                 for url in row.get('sources') or [source]:
                     print(f'    {url}')
             sign = '-' if row['kind'] == 'undelist' else '~' if row.get('replaces') else '+'
-            print(f"    {number:>3}. {sign} {row['list']}: {describe(row)}  [{row['note']}]")
+            note = '; '.join(filter(None, (row['note'], market_note(row.get('market')))))
+            print(f"    {number:>3}. {sign} {row['list']}: {describe(row)}  [{note}]")
     notes = [n for n in state['notes'].values() if not n.get('seen')]
     if notes:
-        print(f'Elle bakılacak {len(notes)} duyuru (satır çıkarılamadı):')
+        print(f'Elle bakılacak {len(notes)} konu:')
         for note in sorted(notes, key=lambda n: n['announced']):
             print(f"  {NAMES[note['exchange']]} {note['announced'][:10]} {note['title']} "
                   f"[{note['reason']}]")
@@ -1306,6 +1635,9 @@ def settle(state, taken):
     """Forgets the drafts that went into the published lists, and the notes shown."""
     for row in taken:
         state['drafts'].pop(event_of(row), None)
+        if row['kind'] == 'swap' and row.get('sources'):
+            state.setdefault('origins', {})[
+                f"{row['list']}|{row['old']}>{row['new']}|{row['date']}"] = row['sources']
     for note in state['notes'].values():
         note['seen'] = True
 

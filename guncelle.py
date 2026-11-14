@@ -105,7 +105,7 @@ def show_delist(before, after, label):
     return lines
 
 
-def show_swap(before, after, label):
+def show_swap(before, after, label, marks=None):
     def by_key(data):
         return {(r['old'], r['new'], r['date']): r for r in data.get('swaps', [])}
 
@@ -113,7 +113,16 @@ def show_swap(before, after, label):
 
     def line(sign, r):
         text = f"  {sign} {label} {r['old']} → {r['new']} {r['rate']} {moment(r['date'])}"
-        return text + ('   ← oranı kontrol et' if sign != '-' and r['ratio'] != 1 else '')
+        if sign == '-':
+            return text
+        mark = (marks or {}).get((label, r['old'], r['new'], r['date']))
+        if mark and mark['state'] == 'doğrulandı':
+            return text + f"   ✓ piyasa oranı {mark['market']}"
+        if mark and mark['state'] == 'şüpheli':
+            return text + f"   ← piyasa oranı {mark['market']}, tutmuyor"
+        if mark and mark['state'] == 'bekliyor':
+            return text + '   (oran swap sonrası piyasadan doğrulanacak)'
+        return text + ('   ← oranı kontrol et' if r['ratio'] != 1 else '')
 
     lines = [line('+', new[k]) for k in new if k not in old]
     lines += [line('-', old[k]) for k in old if k not in new]
@@ -133,7 +142,7 @@ def git(*args):
     return done.stdout.strip()
 
 
-def changes_of(lists):
+def changes_of(lists, marks=None):
     """Checks the lists and tells what changed since they were last published."""
     changes = []
     for name in LISTS:
@@ -143,7 +152,7 @@ def changes_of(lists):
         if size(after) < size(before) * KEPT_SHARE:
             stop(f'{name} çok kısaldı ({size(before)} → {size(after)}); uygulama bu dosyayı reddeder.')
         changes += (show_delist(before, after, name) if name.endswith('_delist')
-                    else show_swap(before, after, name))
+                    else show_swap(before, after, name, marks))
     return changes
 
 
@@ -159,9 +168,15 @@ def main():
         print(f'Duyurular okunamadı ({error}); bekleyen taslaklar kullanılıyor.')
         state = duyurular.load_state()
     drafts = duyurular.show(state)
-    taken = duyurular.pick(state, drafts) if args.sec and not args.deneme else drafts
+    if args.sec and not args.deneme:
+        taken = duyurular.pick(state, drafts)
+    else:
+        # A swap whose ratio the market does not bear out waits; --sec may still take it.
+        taken = [row for row in drafts if (row.get('market') or {}).get('state') != 'şüpheli']
+        if len(taken) < len(drafts):
+            print(f'{len(drafts) - len(taken)} taslak bekletildi: oranı piyasayla tutmuyor.')
     lists = duyurular.applied({name: current(name) for name in LISTS}, taken)
-    changes = changes_of(lists)
+    changes = changes_of(lists, duyurular.ratio_marks(state))
     print()
     print('Listeler: ' + ', '.join(f'{name} {size(lists[name])}' for name in LISTS))
     if not changes:
