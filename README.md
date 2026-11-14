@@ -5,7 +5,7 @@ personal data.
 
 | File | Content |
 | --- | --- |
-| `binance_spot_delist.json` | Coins whose Binance spot USDT market was closed |
+| `binance_spot_delist.json` | Coins that Binance delisted from spot trading |
 | `binance_spot_swap.json` | Token swaps, rebrands and redenominations on Binance |
 | `paribu_delist.json` | Coins that Paribu closed |
 | `paribu_swap.json` | Token swaps, rebrands and redenominations on Paribu |
