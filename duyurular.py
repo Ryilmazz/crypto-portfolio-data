@@ -1631,15 +1631,17 @@ def pick(state, rows):
     return taken
 
 
-def settle(state, taken):
-    """Forgets the drafts that went into the published lists, and the notes shown."""
+def settle(state, taken, notes_seen=True):
+    """Forgets the drafts that went into the published lists, and the notes shown to a
+    person; a run nobody watches leaves the notes for one."""
     for row in taken:
         state['drafts'].pop(event_of(row), None)
         if row['kind'] == 'swap' and row.get('sources'):
             state.setdefault('origins', {})[
                 f"{row['list']}|{row['old']}>{row['new']}|{row['date']}"] = row['sources']
-    for note in state['notes'].values():
-        note['seen'] = True
+    if notes_seen:
+        for note in state['notes'].values():
+            note['seen'] = True
 
 
 def leave(state, row):
@@ -1651,13 +1653,17 @@ def leave(state, row):
 
 
 def notify(drafts, notes):
-    """A Windows notification, for the runs that nobody watches."""
+    """Tells of the new drafts and notes, for the runs that nobody watches."""
     words = []
     if drafts:
         words.append(f'{drafts} yeni taslak')
     if notes:
         words.append(f'{notes} elle bakılacak duyuru')
-    message = ', '.join(words) + '. Görmek için: python guncelle.py'
+    toast(', '.join(words) + '. Görmek için: python guncelle.py')
+
+
+def toast(message):
+    """A Windows notification, for the runs that nobody watches."""
     script = (
         "[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, "
         "ContentType = WindowsRuntime] > $null;"
@@ -1674,12 +1680,17 @@ def notify(drafts, notes):
                    env=env, capture_output=True, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
 
 
+def to_log():
+    """Run by pythonw, from the task scheduler: the output goes to a log."""
+    SOURCE.mkdir(exist_ok=True)
+    sys.stdout = sys.stderr = open(SOURCE / 'duyuru_tarama.log', 'a', encoding='utf-8',
+                                   buffering=1)
+    print(f'--- {stamp(now_utc())}')
+
+
 def main():
     if sys.stdout is None:
-        # Run by pythonw, from the task scheduler: the output goes to a log.
-        SOURCE.mkdir(exist_ok=True)
-        sys.stdout = sys.stderr = open(SOURCE / 'duyuru_tarama.log', 'a', encoding='utf-8')
-        print(f'--- {stamp(now_utc())}')
+        to_log()
     else:
         sys.stdout.reconfigure(encoding='utf-8')
     parser = argparse.ArgumentParser()
